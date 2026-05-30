@@ -60,6 +60,7 @@ GradeWise AI analyzes academic indicators such as study hours, attendance, previ
 ---
 
 ## 🏗️ System Architecture
+![Architecture Diagram](screenshots/Architecture.png)
 
 ```text
 User Input
@@ -82,7 +83,6 @@ Prediction Result
     ▼
 Database Storage
 ```
-![Architecture Diagram](screenshots/Architecture.png)
 ---
 
 ## 🛠️ Tech Stack
