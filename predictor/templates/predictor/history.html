@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GradeWise AI | History</title>
+
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Inter", "Segoe UI", sans-serif;
+      }
+
+      body {
+          min-height: 100vh;
+          background:
+              radial-gradient(circle at top right, #2563eb 0, transparent 35%),
+              radial-gradient(circle at bottom left, #7c3aed 0, transparent 35%),
+              linear-gradient(135deg, #020617, #0f172a);
+          color: #e5e7eb;
+          overflow-x: hidden;
+      }
+
+      .orb {
+          position: fixed;
+          width: 280px;
+          height: 280px;
+          border-radius: 50%;
+          filter: blur(70px);
+          opacity: 0.32;
+          z-index: -1;
+          animation: moveOrb 7s infinite alternate ease-in-out;
+      }
+
+      .orb-one {
+          background: #38bdf8;
+          top: 14%;
+          right: 8%;
+      }
+
+      .orb-two {
+          background: #a855f7;
+          bottom: 8%;
+          left: 6%;
+          animation-delay: 2s;
+      }
+
+      @keyframes moveOrb {
+          from {
+              transform: translateY(0) scale(1);
+          }
+          to {
+              transform: translateY(-35px) scale(1.08);
+          }
+      }
+
+      .navbar {
+          padding: 24px 8%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .brand {
+          font-size: 24px;
+          font-weight: 800;
+      }
+
+      .brand span {
+          color: #38bdf8;
+      }
+
+      .nav-link {
+          color: #cbd5e1;
+          text-decoration: none;
+          padding: 10px 18px;
+          border-radius: 999px;
+          border: 1px solid rgba(255,255,255,0.15);
+          transition: 0.3s;
+      }
+
+      .nav-link:hover {
+          background: rgba(255,255,255,0.12);
+          transform: translateY(-2px);
+      }
+
+      .container {
+          width: 92%;
+          max-width: 1200px;
+          margin: 35px auto;
+      }
+
+      .header {
+          margin-bottom: 28px;
+          animation: fadeDown 0.8s ease forwards;
+      }
+
+      .badge {
+          display: inline-block;
+          margin-bottom: 16px;
+          padding: 9px 16px;
+          border-radius: 999px;
+          background: rgba(139,92,246,0.14);
+          border: 1px solid rgba(139,92,246,0.35);
+          color: #c4b5fd;
+          font-size: 14px;
+      }
+
+      .header h1 {
+          font-size: clamp(38px, 5vw, 64px);
+          letter-spacing: -1.5px;
+          margin-bottom: 12px;
+      }
+
+      .header h1 span {
+          background: linear-gradient(90deg, #38bdf8, #a78bfa);
+          -webkit-background-clip: text;
+          color: transparent;
+      }
+
+      .header p {
+          color: #cbd5e1;
+          line-height: 1.7;
+          max-width: 700px;
+      }
+
+      .table-card {
+          margin-top: 30px;
+          padding: 24px;
+          border-radius: 30px;
+          background: rgba(15,23,42,0.72);
+          border: 1px solid rgba(255,255,255,0.15);
+          backdrop-filter: blur(22px);
+          box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+          overflow-x: auto;
+          animation: riseUp 0.85s ease forwards;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 900px;
+      }
+
+      thead {
+          background: rgba(56,189,248,0.12);
+      }
+
+      th {
+          padding: 16px;
+          text-align: left;
+          color: #7dd3fc;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+      }
+
+      td {
+          padding: 16px;
+          color: #e2e8f0;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      tbody tr {
+          transition: 0.3s;
+          animation: rowFade 0.6s ease forwards;
+      }
+
+      tbody tr:hover {
+          background: rgba(255,255,255,0.07);
+          transform: scale(1.01);
+      }
+
+      .pill {
+          display: inline-block;
+          padding: 7px 13px;
+          border-radius: 999px;
+          font-weight: 800;
+          font-size: 13px;
+      }
+
+      .pass {
+          background: rgba(34,197,94,0.15);
+          color: #86efac;
+          border: 1px solid rgba(34,197,94,0.35);
+      }
+
+      .fail {
+          background: rgba(239,68,68,0.15);
+          color: #fca5a5;
+          border: 1px solid rgba(239,68,68,0.35);
+      }
+
+      .empty {
+          padding: 40px;
+          text-align: center;
+          color: #94a3b8;
+      }
+
+      .summary-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(170px, 1fr));
+          gap: 18px;
+          margin-top: 28px;
+      }
+
+      .summary-card {
+          padding: 20px;
+          border-radius: 24px;
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.12);
+          backdrop-filter: blur(18px);
+          transition: 0.35s;
+          animation: riseUp 0.8s ease forwards;
+      }
+
+      .summary-card:hover {
+          transform: translateY(-8px) rotateX(7deg);
+          box-shadow: 0 25px 60px rgba(56,189,248,0.16);
+      }
+
+      .summary-card h3 {
+          font-size: 30px;
+          color: #38bdf8;
+          margin-bottom: 4px;
+      }
+
+      .summary-card p {
+          color: #94a3b8;
+          font-size: 14px;
+      }
+
+      @keyframes fadeDown {
+          from {
+              opacity: 0;
+              transform: translateY(-25px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      @keyframes riseUp {
+          from {
+              opacity: 0;
+              transform: translateY(35px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      @keyframes rowFade {
+          from {
+              opacity: 0;
+              transform: translateY(12px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      @media (max-width: 800px) {
+          .summary-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .header h1 {
+              font-size: 40px;
+          }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+
+    <nav class="navbar">
+      <div class="brand">GradeWise <span>AI</span></div>
+      <a href="{% url 'predict' %}" class="nav-link">New Prediction</a>
+    </nav>
+
+    <main class="container">
+      <section class="header">
+        <div class="badge">Prediction Records</div>
+
+        <h1>Academic prediction <span>history.</span></h1>
+
+        <p>
+          Review all previous student performance predictions, confidence
+          scores, input features, and timestamps stored in your Django database.
+        </p>
+      </section>
+
+      <section class="summary-grid">
+        <div class="summary-card">
+          <h3>{{ histories|length }}</h3>
+          <p>Total Predictions</p>
+        </div>
+
+        <div class="summary-card">
+          <h3>ML</h3>
+          <p>Model-Based Records</p>
+        </div>
+
+        <div class="summary-card">
+          <h3>DB</h3>
+          <p>SQLite Stored History</p>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Study Hours</th>
+              <th>Attendance</th>
+              <th>Previous Marks</th>
+              <th>Assignment Score</th>
+              <th>Prediction</th>
+              <th>Confidence</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for item in histories %}
+            <tr>
+              <td>{{ item.study_hours }}</td>
+              <td>{{ item.attendance }}%</td>
+              <td>{{ item.previous_marks }}</td>
+              <td>{{ item.assignment_score }}</td>
+
+              <td>
+                {% if item.prediction == "Pass" %}
+                <span class="pill pass">Pass</span>
+                {% else %}
+                <span class="pill fail">Fail</span>
+                {% endif %}
+              </td>
+
+              <td>
+                {% if item.probability %} {{ item.probability|floatformat:2 }}
+                {% else %} N/A {% endif %}
+              </td>
+
+              <td>{{ item.created_at|date:"M d, Y H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="empty">
+                No prediction history found. Create your first prediction.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
